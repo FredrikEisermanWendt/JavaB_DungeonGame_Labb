@@ -11,6 +11,20 @@ public abstract class Character {
     private int money  = 10;
     private final int BASE_DAMAGE = 10;
 
+    public Character(){
+
+    }
+
+    public Character(int health, int strength, int intelligence, int agility, int level, int experience, int money) {
+        this.health = health;
+        this.strength = strength;
+        this.intelligence = intelligence;
+        this.agility = agility;
+        this.level = level;
+        this.experience = experience;
+        this.money = money;
+    }
+
     public int getHealth() {
         return health;
     }

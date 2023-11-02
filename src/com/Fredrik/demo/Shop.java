@@ -1,4 +1,4 @@
 package com.Fredrik.demo;
 
-public interface Menu {
+public class Shop {
 }

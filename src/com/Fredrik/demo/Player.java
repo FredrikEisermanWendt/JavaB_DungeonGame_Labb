@@ -6,15 +6,15 @@ public class Player extends Character{
 
 //    användaren får 15 poäng att dela på strength agility och intelligence
     public Player(String name, int strength, int agility ,int intelligence) {
+        super(30, strength, intelligence, agility, 1,0, 0);
         this.name = name;
-        super.setHealth(30);
-        super.setLevel(1);
-        super.setStrength(strength);
-        super.setAgility(agility);
-        super.setIntelligence(intelligence);
-        super.setExperience(0);
-        super.setMoney(0);
     }
+
+
+    public void fight(){
+
+    }
+
 
     public String getName(){
         return name;
