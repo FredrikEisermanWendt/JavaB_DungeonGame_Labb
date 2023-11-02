@@ -14,7 +14,7 @@ public class Game {
         titleMenu();
         System.out.println("Welcome adventurer");
         setPlayer();
-        titleMenu();
+        gameMenu();
     }
 
     private void setPlayer() {
@@ -52,17 +52,44 @@ public class Game {
     }
 
     private void gameMenu() {
-        switch (scan.registerString("")) {
-            case "1" -> fightMonster();
-            case "2" -> figthBoss();
-            case "3" -> System.out.println(player);
-            case "4" -> shop.buyItems;
-            case "5" -> titleMenu();
-        }
+        boolean isPlaying = true;
+        do {
+            // TODO: 2023-11-02 finish menu
+            System.out.println("""
+                    Menu!!!""");
+            switch (scan.registerString("")) {
+                case "1" -> fightMonster();
+//                case "2" -> figthBoss();
+                case "3" -> System.out.println(player);
+//                case "4" -> shop.buyItems;
+                case "5" -> {titleMenu(); isPlaying = false;}
+                default -> System.out.println("Wrong input " + player.getName());
+            }
+        } while(isPlaying);
     }
 
     private void fightMonster() {
-        Monster m = monsterList.get(0);
+        Monster monster = monsterList.get(0);
+        do{
+            System.out.println("You Stumbled upon a " + monster);
+            System.out.println("""
+                    1: Attack
+                    2: Show Battle status
+                    3: try to run
+                    """);
+            switch(scan.registerString("")){
+                case "1" -> fight(monster);
+                case "2" -> System.out.println();
+                case "3" -> System.out.println();
+                default -> System.out.println("Wrong input " + player.getName());
+            }
+        } while()
+    }
+
+//    spelaren ska först få slå, crit räknas ut med inteligence och damage räknas ut med streng + weapon
+    private void fight(Monster monster){
+        player.attack(monster);
+        monster.attack(player);
     }
 
 

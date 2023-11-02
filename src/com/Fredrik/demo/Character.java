@@ -1,17 +1,25 @@
 package com.Fredrik.demo;
 
-public abstract class Character {
+public abstract class Character implements ICombat{
 
     private int health = 10;
     private int strength = 2;
     private int intelligence = 2;
-    private int agility = 2;
+    private int agility = 15;
     private int level = 1;
     private int experience = 10;
     private int money  = 10;
     private final int BASE_DAMAGE = 10;
 
-    public Character(){
+    public Character( int level){
+        this.level = level;
+        health = health * level;
+        strength = strength * level;
+        intelligence = intelligence * level;
+        agility = agility - level;
+        experience = experience * level;
+        money = money * level;
+
 
     }
 
@@ -83,5 +91,9 @@ public abstract class Character {
 
     public void setExperience(int experience) {
         this.experience = experience;
+    }
+
+    public void looseHealth(int damage){
+        health -= damage;
     }
 }
