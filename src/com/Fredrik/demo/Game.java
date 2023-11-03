@@ -58,7 +58,7 @@ public class Game {
             System.out.println("""
                     Menu!!!""");
             switch (scan.registerString("")) {
-                case "1" -> fightMonster();
+                case "1" -> fightMonsterMenu();
 //                case "2" -> figthBoss();
                 case "3" -> System.out.println(player);
 //                case "4" -> shop.buyItems;
@@ -68,7 +68,7 @@ public class Game {
         } while(isPlaying);
     }
 
-    private void fightMonster() {
+    private void fightMonsterMenu() {
         Monster monster = monsterList.get(0);
         do{
             System.out.println("You Stumbled upon a " + monster);
@@ -83,7 +83,7 @@ public class Game {
                 case "3" -> System.out.println();
                 default -> System.out.println("Wrong input " + player.getName());
             }
-        } while()
+        } while(true);
     }
 
 //    spelaren ska först få slå, crit räknas ut med inteligence och damage räknas ut med streng + weapon

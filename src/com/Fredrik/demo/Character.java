@@ -2,10 +2,9 @@ package com.Fredrik.demo;
 
 public abstract class Character implements ICombat{
 
+    // TODO: 2023-11-02 Ta bort intelligence och agility från Character och lägg  i Player
     private int health = 10;
     private int strength = 2;
-    private int intelligence = 2;
-    private int agility = 15;
     private int level = 1;
     private int experience = 10;
     private int money  = 10;
@@ -15,19 +14,15 @@ public abstract class Character implements ICombat{
         this.level = level;
         health = health * level;
         strength = strength * level;
-        intelligence = intelligence * level;
-        agility = agility - level;
         experience = experience * level;
         money = money * level;
 
 
     }
 
-    public Character(int health, int strength, int intelligence, int agility, int level, int experience, int money) {
+    public Character(int health, int strength, int level, int experience, int money) {
         this.health = health;
         this.strength = strength;
-        this.intelligence = intelligence;
-        this.agility = agility;
         this.level = level;
         this.experience = experience;
         this.money = money;
@@ -61,21 +56,6 @@ public abstract class Character implements ICombat{
         this.strength = strength;
     }
 
-    public int getIntelligence() {
-        return intelligence;
-    }
-
-    public void setIntelligence(int intelligence) {
-        this.intelligence = intelligence;
-    }
-
-    public int getAgility() {
-        return agility;
-    }
-
-    public void setAgility(int agility) {
-        this.agility = agility;
-    }
 
     public int getLevel() {
         return level;
@@ -93,7 +73,9 @@ public abstract class Character implements ICombat{
         this.experience = experience;
     }
 
-    public void looseHealth(int damage){
+    public boolean looseHealth(int damage){
         health -= damage;
+        return true;
     }
+
 }
