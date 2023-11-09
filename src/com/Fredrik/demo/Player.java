@@ -7,6 +7,7 @@ public class Player extends Character {
     private final String name;
     private int intelligence;
     private int agility;
+    private int weaponDamage = 0;
     private Weapon weapon;
 
 
@@ -19,21 +20,17 @@ public class Player extends Character {
     }
 
 
-    public void fight() {
-
-    }
-
     public void levelUp() {
-        if (getExperience() > 100) {
             int temp = getExperience() % 100;
-            setLevel(1);
-        }
+            setLevel(getLevel() + 1);
+            setExperience(temp);
+            setHealth( getHealth() + 10);
+            setStrength(getStrength() + 5);
+            setAgility(getAgility() + 5);
+            setIntelligence(getIntelligence() + 5);
+            System.out.println("You gained a level");
     }
 
-    @Override
-    public void setLevel(int level) {
-        super.setLevel(getLevel() + level);
-    }
 
 
     public String getName() {
@@ -59,28 +56,31 @@ public class Player extends Character {
 
     @Override
     public void attack(Character monster) {
-        monster.looseHealth(calculateDamage());
+        int damage = calculateDamage();
+        monster.looseHealth(damage);
+        System.out.println("You did " + damage + " damage to the monster");
     }
 
     @Override
     public int calculateDamage() {
         if(didCriticalHit()) {
-            return (int) ((getStrength() + weapon.getDamage()) * 1.5);
+            System.out.println("You got a critical hit!");
+            return (int) ((getStrength() + weaponDamage) * 1.5);
         }
-        return getStrength() + weapon.getDamage();
+        return getStrength() + weaponDamage;
     }
 
     public boolean didCriticalHit() {
-        return isSuccsessfull(20 + intelligence);
+        return isSuccessful(20 + intelligence);
     }
 
 
     public boolean didDodge(int agility) {
-        return isSuccsessfull(20 + getAgility());
+        return isSuccessful(20 + getAgility());
     }
 
 
-    private boolean isSuccsessfull(int numberToGet){
+    private boolean isSuccessful(int numberToGet){
         Random rand = new Random();
         if (rand.nextInt(0, 101) <= numberToGet){
             return true;
@@ -90,6 +90,13 @@ public class Player extends Character {
 
     }
 
+    public void getReward(Monster monster) {
+        setExperience(getExperience() + monster.getExperience());
+        setMoney(getMoney() + monster.getMoney());
+        if(getExperience() >= 100){
+            levelUp();
+        }
+    }
 
     public int getIntelligence() {
         return intelligence;
@@ -107,6 +114,8 @@ public class Player extends Character {
         this.agility = agility;
     }
 
+
+
     public Weapon getWeapon() {
         return weapon;
     }
@@ -114,4 +123,5 @@ public class Player extends Character {
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
+
 }
