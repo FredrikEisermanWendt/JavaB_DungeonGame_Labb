@@ -6,6 +6,7 @@ import java.util.List;
 public class Game {
 
     private List<Monster> monsterList = new ArrayList<>();
+    private Monster boss = new Monster(20);
     private CustomScanner scan = new CustomScanner();
     private Player player;
     private Shop shop = new Shop();
@@ -28,15 +29,15 @@ public class Game {
         int statPoints = 15;
         String name = scan.registerString("What is your name");
         System.out.println("You have 15 points to distribute between, Strength, Intelligence and Agility, chose wisely");
-        int strength = getPlayerSatsFromUser("Strength", statPoints);
+        int strength = getPlayerStatsFromUser("Strength", statPoints);
         statPoints -= strength;
-        int intelligence = getPlayerSatsFromUser("Intelligence", statPoints);
+        int intelligence = getPlayerStatsFromUser("Intelligence", statPoints);
         statPoints -= intelligence;
         player = new Player(name, strength, intelligence, statPoints);
 
     }
 
-    private int getPlayerSatsFromUser(String stat, int statPoints) {
+    private int getPlayerStatsFromUser(String stat, int statPoints) {
         do {
             int temp = scan.registerInt("For " + stat + ", give me a number between 1 and " + statPoints);
             if (temp > statPoints) {
@@ -75,8 +76,8 @@ public class Game {
                     4: Buy items
                     5: Go back to Title Menu, all progress will be lost""");
             switch (scan.registerString("")) {
-                case "1" -> fightMonsterMenu();
-//                case "2" -> figthBoss();
+                case "1" -> fightMonsterMenu(0);
+                case "2" -> fightMonsterMenu(1);
                 case "3" -> System.out.println(player);
 //                case "4" -> shop.buyItems;
                 case "5" -> {
@@ -88,34 +89,57 @@ public class Game {
         } while (isPlaying);
     }
 
-    private void fightMonsterMenu() {
+    private void fightMonsterMenu(int i) {
         boolean isPlaying = true;
-        Monster monster = monsterList.get(0);
-            System.out.println("You Stumbled upon a " + monster);
+        Monster monster = getMonster(i);
+        System.out.println("You Stumbled upon a " + monster);
         do {
             System.out.println("""
                     1: Attack
                     2: Show Battle status
-                    3: try to run
+                    3: Try to run
                     """);
             switch (scan.registerString("")) {
-                case "1" -> fight(monster);
-                case "2" -> System.out.println(player + "\n" + monster);
-                case "3" -> System.out.println();
+                case "1" -> attackSequence(monster);
+                case "2" -> System.out.println(player + "\n\n" + monster);
+                case "3" -> isPlaying = !escapeFight(monster);
                 default -> System.out.println("Wrong input " + player.getName());
             }
-            if (monster.getHealth() <= 0){
+            if (monster.getHealth() <= 0) {
                 isPlaying = false;
             }
         } while (isPlaying);
     }
 
-    private void fight(Monster monster) {
+    // TODO: 2023-11-09 Felhantera att monstererna är slut i listan
+    private Monster getMonster(int i) {
+        if (i == 1) {
+            return boss;
+        } else {
+            return monsterList.get(0);
+        }
+
+    }
+
+    private boolean escapeFight(Monster monster) {
+        if (player.didDodge()) {
+            System.out.println("You got away");
+            return true;
+        } else {
+            System.out.println("You failed to escape");
+            monster.attack(player);
+            return false;
+        }
+
+    }
+
+    private void attackSequence(Monster monster) {
         player.attack(monster);
-        if (monster.getHealth() <= 0){
+        if (monster.getHealth() <= 0) {
             player.getReward(monster);
-            player.levelUp();
-        }else {
+            monsterList.remove(monster);
+        } else {
+//            behöver fixa vad som händer om player dör
             monster.attack(player);
         }
     }

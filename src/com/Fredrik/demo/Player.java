@@ -46,10 +46,10 @@ public class Player extends Character {
 
     @Override
     public boolean looseHealth(int damage) {
-        if(didDodge(getAgility())){
+        if(didDodge()){
             return false;
         }else {
-            super.setHealth(damage);
+            super.setHealth(getHealth() - damage);
             return true;
         }
     }
@@ -75,7 +75,7 @@ public class Player extends Character {
     }
 
 
-    public boolean didDodge(int agility) {
+    public boolean didDodge() {
         return isSuccessful(20 + getAgility());
     }
 

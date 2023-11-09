@@ -18,9 +18,9 @@ public class Monster extends Character {
     @Override
     public void attack(Character player) {
         if (player.looseHealth(getStrength())) {
-            System.out.println("Monster hit you");
+            System.out.println("Monster connects with his attack");
         } else {
-            System.out.println("You dodged the attack");
+            System.out.println("Monster is to slow and misses with it's attack");
         }
     }
 
