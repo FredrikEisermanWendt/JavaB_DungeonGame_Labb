@@ -1,7 +1,5 @@
+import com.Fredrik.demo.*;
 import com.Fredrik.demo.Character;
-import com.Fredrik.demo.Game;
-import com.Fredrik.demo.Monster;
-import com.Fredrik.demo.Player;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,6 +31,8 @@ public class Main {
 
 
         Game g = new Game();
+
+        Armor a = new Armor();
 
     }
 }

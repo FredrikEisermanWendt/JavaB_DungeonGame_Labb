@@ -7,7 +7,6 @@ public class Player extends Character {
     private final String name;
     private int intelligence;
     private int agility;
-    private int weaponDamage = 0;
     private Weapon weapon;
 
 
@@ -63,11 +62,8 @@ public class Player extends Character {
 
     @Override
     public int calculateDamage() {
-        if(didCriticalHit()) {
-            System.out.println("You got a critical hit!");
-            return (int) ((getStrength() + weaponDamage) * 1.5);
-        }
-        return getStrength() + weaponDamage;
+        int damage = getStrength() + weapon.getDamage();
+        return didCriticalHit() ? (int) (damage * 1.5) : damage;
     }
 
     public boolean didCriticalHit() {

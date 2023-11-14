@@ -105,20 +105,14 @@ public class Game {
                 case "3" -> isPlaying = !escapeFight(monster);
                 default -> System.out.println("Wrong input " + player.getName());
             }
-            if (monster.getHealth() <= 0) {
-                isPlaying = false;
-            }
+            isPlaying = monster.isAlive();
+
         } while (isPlaying);
     }
 
     // TODO: 2023-11-09 Felhantera att monstererna är slut i listan
     private Monster getMonster(int i) {
-        if (i == 1) {
-            return boss;
-        } else {
-            return monsterList.get(0);
-        }
-
+        return i == 1 ? boss : monsterList.get(0);
     }
 
     private boolean escapeFight(Monster monster) {
@@ -135,7 +129,7 @@ public class Game {
 
     private void attackSequence(Monster monster) {
         player.attack(monster);
-        if (monster.getHealth() <= 0) {
+        if (!monster.isAlive()) {
             player.getReward(monster);
             monsterList.remove(monster);
         } else {

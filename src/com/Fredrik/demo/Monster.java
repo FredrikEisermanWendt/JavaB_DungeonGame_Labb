@@ -19,6 +19,7 @@ public class Monster extends Character {
     public void attack(Character player) {
         if (player.looseHealth(getStrength())) {
             System.out.println("Monster connects with his attack");
+            System.out.println("You lost " + calculateDamage() + " health");
         } else {
             System.out.println("Monster is to slow and misses with it's attack");
         }
