@@ -2,8 +2,8 @@ package com.Fredrik.demo;
 
 public class Weapon extends Item {
 
-    public Weapon(){
-        super(10, 30);
+    public Weapon() {
+        super(10, 30, "weapon");
     }
 
     @Override
@@ -13,9 +13,12 @@ public class Weapon extends Item {
 
 
     public int getDamage() {
-        return super.getVALUE();
+        return super.getValue();
 
     }
 
-
+    @Override
+    public String toString() {
+        return "Weapon: price: " + getPrice();
+    }
 }

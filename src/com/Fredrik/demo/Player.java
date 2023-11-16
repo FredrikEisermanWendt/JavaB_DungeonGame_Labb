@@ -12,7 +12,7 @@ public class Player extends Character {
 
     //    användaren får 15 poäng att dela på strength agility och intelligence
     public Player(String name, int strength, int agility, int intelligence) {
-        super(30, strength,  1, 0, 0);
+        super(30, strength, 1, 0, 0);
         this.name = name;
         this.agility = agility;
         this.intelligence = intelligence;
@@ -20,16 +20,15 @@ public class Player extends Character {
 
 
     public void levelUp() {
-            int temp = getExperience() % 100;
-            setLevel(getLevel() + 1);
-            setExperience(temp);
-            setHealth( getHealth() + 10);
-            setStrength(getStrength() + 5);
-            setAgility(getAgility() + 5);
-            setIntelligence(getIntelligence() + 5);
-            System.out.println("You gained a level");
+        int temp = getExperience() % 100;
+        setLevel(getLevel() + 1);
+        setExperience(temp);
+        setHealth(getHealth() + 10);
+        setStrength(getStrength() + 5);
+        setAgility(getAgility() + 5);
+        setIntelligence(getIntelligence() + 5);
+        System.out.println("You gained a level");
     }
-
 
 
     public String getName() {
@@ -45,9 +44,9 @@ public class Player extends Character {
 
     @Override
     public boolean looseHealth(int damage) {
-        if(didDodge()){
+        if (didDodge()) {
             return false;
-        }else {
+        } else {
             super.setHealth(getHealth() - damage);
             return true;
         }
@@ -76,11 +75,11 @@ public class Player extends Character {
     }
 
 
-    private boolean isSuccessful(int numberToGet){
+    private boolean isSuccessful(int numberToGet) {
         Random rand = new Random();
-        if (rand.nextInt(0, 101) <= numberToGet){
+        if (rand.nextInt(0, 101) <= numberToGet) {
             return true;
-        }else{
+        } else {
             return false;
         }
 
@@ -89,7 +88,7 @@ public class Player extends Character {
     public void getReward(Monster monster) {
         setExperience(getExperience() + monster.getExperience());
         setMoney(getMoney() + monster.getMoney());
-        if(getExperience() >= 100){
+        if (getExperience() >= 100) {
             levelUp();
         }
     }
@@ -109,7 +108,6 @@ public class Player extends Character {
     public void setAgility(int agility) {
         this.agility = agility;
     }
-
 
 
     public Weapon getWeapon() {

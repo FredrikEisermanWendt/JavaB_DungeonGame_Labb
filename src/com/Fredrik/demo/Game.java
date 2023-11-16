@@ -9,7 +9,7 @@ public class Game {
     private Monster boss = new Monster(20);
     private CustomScanner scan = new CustomScanner();
     private Player player;
-    private Shop shop = new Shop();
+    private Shop shop = new Shop(player);
 
     public Game() {
         titleMenu();
@@ -79,7 +79,7 @@ public class Game {
                 case "1" -> fightMonsterMenu(0);
                 case "2" -> fightMonsterMenu(1);
                 case "3" -> System.out.println(player);
-//                case "4" -> shop.buyItems;
+                case "4" -> shop.buyItems();
                 case "5" -> {
                     titleMenu();
                     isPlaying = false;
@@ -102,7 +102,11 @@ public class Game {
             switch (scan.registerString("")) {
                 case "1" -> attackSequence(monster);
                 case "2" -> System.out.println(player + "\n\n" + monster);
-                case "3" -> isPlaying = !escapeFight(monster);
+                case "3" -> {
+                    if (escapeFight(monster)) {
+                        return;
+                    }
+                }
                 default -> System.out.println("Wrong input " + player.getName());
             }
             isPlaying = monster.isAlive();

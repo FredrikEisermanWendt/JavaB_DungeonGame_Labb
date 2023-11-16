@@ -4,15 +4,25 @@ public abstract class Item {
 
     final int VALUE;
     final int PRICE;
+    final String TYPE;
 
 
-    public Item(int value, int price) {
-        this.VALUE = value;
-        this.PRICE = price;
+    public Item(int value, int price, String type) {
+        VALUE = value;
+        PRICE = price;
+        TYPE = type;
     }
 
-    protected int getVALUE() {
+    public int getValue() {
         return VALUE;
+    }
+
+    public int getPrice() {
+        return PRICE;
+    }
+
+    public String getTYPE(){
+        return TYPE;
     }
 
     public abstract void use(Player player);

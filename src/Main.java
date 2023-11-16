@@ -10,7 +10,7 @@ public class Main {
 
 //        Scanner scan = new Scanner(System.in);
 //
-//        Player p1 = new Player("Kalle", 5, 5, 5);
+        Player p1 = new Player("Kalle", 5, 5, 5);
 //        Monster m1 = new Monster(1);
 //
 //        Character c1 = new Player("KAlle", 5, 5, 5);
@@ -33,6 +33,14 @@ public class Main {
         Game g = new Game();
 
         Armor a = new Armor();
+        Weapon w = new Weapon();
+        Item iw = new Weapon();
+
+        Weapon w2 = (Weapon) iw;
+
+        iw.use(p1);
+
+        System.out.println(p1.getWeapon());
 
     }
 }
