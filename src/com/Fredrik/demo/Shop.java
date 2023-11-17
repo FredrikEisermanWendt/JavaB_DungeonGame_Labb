@@ -35,20 +35,25 @@ public class Shop {
                     3: Weapon""");
             switch (scan.registerString("")){
                 case "1" -> addToShoppingCart("armor");
-                case "2" -> {i = getItemByType("healthpotion"); i.use(player); itemList.remove(i);}
-                case "3" -> {i = getItemByType("weapon"); i.use(player); itemList.remove(i);}
+                case "2" -> addToShoppingCart("potion");
+                case "3" -> addToShoppingCart("weapon");
                 default -> System.out.println("Wrong input " + player.getName());
             }
 
 
         }while (isShopping);
     }
+//     i = getItemByType("healthpotion"); i.use(player); itemList.remove(i);
 
     private void addToShoppingCart(String type) {
         Item item = getItemByType(type);
-        shoppinCart.add(item);
-        totalPrice += item.getPrice();
-        itemList.remove(item);
+        if (item == null){
+            System.out.println("Im sorry adventurer, but I seem to be out of that item");
+        }else {
+            shoppinCart.add(item);
+            totalPrice += item.getPrice();
+            itemList.remove(item);
+        }
     }
 
 

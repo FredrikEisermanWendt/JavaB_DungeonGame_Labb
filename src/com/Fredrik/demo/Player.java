@@ -1,13 +1,16 @@
 package com.Fredrik.demo;
 
 import java.util.Random;
+import com.Fredrik.demo.ColorSetter;
+
+import static com.Fredrik.demo.ColorSetter.*;
 
 public class Player extends Character {
 
     private final String name;
     private int intelligence;
     private int agility;
-    private Weapon weapon;
+    private Weapon weapon = null;
 
 
     //    användaren får 15 poäng att dela på strength agility och intelligence
@@ -37,9 +40,14 @@ public class Player extends Character {
 
     @Override
     public String toString() {
-        return "Name: " + name + "\nHealth: " + getHealth() + "\nLevel: " + getLevel() + "\nStrength: " + getStrength() +
-                "\nAgility: " + getAgility() + "\nIntelligence: " + getIntelligence() +
-                "\nExperience: " + getExperience() + "\nMoney: " + getMoney();
+        return  name +
+                GREEN + "\nHealth: " + getHealth() +
+                BLUE + "\nLevel: " + getLevel() +
+                RED + "\nStrength: " + getStrength() +
+                CYAN + "\nAgility: " + getAgility() +
+                PURPLE + "\nIntelligence: " + getIntelligence() +
+                WHITE + "\nExperience: " + getExperience() +
+                YELLOW + "\nMoney: " + getMoney() + RESET;
     }
 
     @Override
@@ -61,8 +69,12 @@ public class Player extends Character {
 
     @Override
     public int calculateDamage() {
-        int damage = getStrength() + weapon.getDamage();
+        int damage = getStrength() + getWeaponDamage();
         return didCriticalHit() ? (int) (damage * 1.5) : damage;
+    }
+
+    private int getWeaponDamage() {
+        return getWeapon() == null ? 0 : getWeapon().getDamage();
     }
 
     public boolean didCriticalHit() {
@@ -77,11 +89,7 @@ public class Player extends Character {
 
     private boolean isSuccessful(int numberToGet) {
         Random rand = new Random();
-        if (rand.nextInt(0, 101) <= numberToGet) {
-            return true;
-        } else {
-            return false;
-        }
+        return rand.nextInt(0, 101) <= numberToGet;
 
     }
 
@@ -108,7 +116,6 @@ public class Player extends Character {
     public void setAgility(int agility) {
         this.agility = agility;
     }
-
 
     public Weapon getWeapon() {
         return weapon;

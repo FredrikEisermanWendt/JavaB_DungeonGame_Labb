@@ -17,5 +17,7 @@ public class ShopTestSout {
         p.setMoney(10000);
         System.out.println(p);
 
+        shop.buyItems();
+
     }
 }

@@ -7,8 +7,8 @@ public class CustomScanner {
 
 
     public int registerInt(String header) {
-        int result = 0;
-        while (result < 1) {
+        int result = -1000;
+        while (result == -1000) {
             System.out.println(header);
             result = intChecker();
         }

@@ -3,12 +3,14 @@ package com.Fredrik.demo;
 public abstract class Character implements ICombat {
 
     // TODO: 2023-11-02 Ta bort intelligence och agility från Character och lägg  i Player
+    private String name = "";
     private int fullHealth = 10;
     private int health = 10;
     private int strength = 2;
     private int level = 1;
     private int experience = 10;
     private int money = 10;
+
 
 
     public Character(int level) {
@@ -31,8 +33,20 @@ public abstract class Character implements ICombat {
         this.money = money;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getFullHealth() {
         return fullHealth;
+    }
+
+    public void setFullHealth(int fullHealth) {
+        this.fullHealth = fullHealth;
     }
 
     public int getHealth() {
@@ -76,12 +90,12 @@ public abstract class Character implements ICombat {
     }
 
     public boolean looseHealth(int damage) {
-        health -= damage;
+        setHealth(getHealth() - damage);
         return true;
     }
 
     public boolean isAlive() {
-        return health > 0 ? true : false;
+        return getHealth() > 0;
     }
 
 }

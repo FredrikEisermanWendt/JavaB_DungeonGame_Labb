@@ -26,13 +26,17 @@ public class Game {
     }
 
     private void setPlayer() {
-        int statPoints = 15;
+        int statPoints = 13;
         String name = scan.registerString("What is your name");
-        System.out.println("You have 15 points to distribute between, Strength, Intelligence and Agility, chose wisely");
+        System.out.println("""
+                You have 15 points to distribute between, Strength, Intelligence and Agility
+                You must give each attribute at least 1 point
+                Chose wisely""");
         int strength = getPlayerStatsFromUser("Strength", statPoints);
         statPoints -= strength;
         int intelligence = getPlayerStatsFromUser("Intelligence", statPoints);
         statPoints -= intelligence;
+        System.out.println("What is left is added to your Agility: " + statPoints);
         player = new Player(name, strength, intelligence, statPoints);
 
     }
@@ -40,7 +44,7 @@ public class Game {
     private int getPlayerStatsFromUser(String stat, int statPoints) {
         do {
             int temp = scan.registerInt("For " + stat + ", give me a number between 1 and " + statPoints);
-            if (temp > statPoints) {
+            if (temp > statPoints || temp < 1) {
                 System.out.println("Are you trying to cheat my friend, try again!");
             } else {
                 return temp;
@@ -134,6 +138,7 @@ public class Game {
     private void attackSequence(Monster monster) {
         player.attack(monster);
         if (!monster.isAlive()) {
+            System.out.println("You defeated the monster");
             player.getReward(monster);
             monsterList.remove(monster);
         } else {

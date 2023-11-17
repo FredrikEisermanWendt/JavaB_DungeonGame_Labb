@@ -1,17 +1,23 @@
 package com.Fredrik.demo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Monster extends Character {
-//level i monster och experience kommer att påverka damage, intelligence och agility;
+
+    List<String> monsterNameList = Arrays.asList("Keese", "ChuChu", "Octorok", "Bokoblin", "Moblin", "Lizalfos", "Horriblin", "Gibdo", "Stone Tallus", "Lynox", "King Gleok");
 
     public Monster(int level) {
         super(level);
+        setName(getName());
 
     }
 
 
     @Override
     public String toString() {
-        return "Monster Level: " + getLevel() + "\nHealth: " + getHealth() + "\nStrength: " + getStrength()
+        return getName() + "\nHealth: " + getHealth() + "\nStrength: " + getStrength()
                 + "\nExperience: " + getExperience() + "\nMoney: " + getMoney();
     }
 
@@ -29,5 +35,18 @@ public class Monster extends Character {
     public int calculateDamage() {
         return getStrength();
     }
+
+    @Override
+    public String getName() {
+        if (getLevel() == 20){
+            return monsterNameList.get(monsterNameList.size() - 1);
+        }else if (getLevel() > monsterNameList.size() && getLevel() != 20){
+            return "Error; Monster name not found";
+        }else {
+            return monsterNameList.get(getLevel()-1);
+        }
+
+    }
+
 
 }
