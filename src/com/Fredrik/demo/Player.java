@@ -111,8 +111,14 @@ public class Player extends Character {
         if (super.isAlive()) {
             return super.isAlive();
         }
-//        writeFile();
+        writeFile();
         return false;
+    }
+
+
+    // TODO: 2023-11-18 fixa write score clas + method, 
+    public void writeFile() {
+//        ws.WriteScoreCard();
     }
 
 
@@ -144,4 +150,12 @@ public class Player extends Character {
         this.itemList.addAll(itemList);
     }
 
+
+    public void useItems() {
+        for (Item i : itemList){
+            i.use(this);
+            
+        }
+        itemList.clear();
+    }
 }

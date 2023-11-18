@@ -75,8 +75,11 @@ public class Game {
                 case "1" -> fightMonster(getMonster());
                 case "2" -> fightBoss(getBoss());
                 case "3" -> System.out.println(player);
-                case "4" -> shop.buyItems();
+                case "4" -> {
+                    shop.buyItems(); player.useItems();
+                }
                 case "5" -> endGame();
+                case "6" -> fightMonsterMenu(getBoss());
 
                 default -> System.out.println("Wrong input " + player.getName());
             }
@@ -124,8 +127,8 @@ public class Game {
             isFighting = monster.isAlive();
 
         } while (isFighting);
-        if (monster.equals(getBoss())){
-//            playWonGameScene();
+        if (monster.equals(getBoss())) {
+            playWonGameScene();
         }
     }
 
@@ -150,12 +153,24 @@ public class Game {
             player.getReward(monster);
             monsterList.remove(monster);
         } else {
-            // TODO: 2023-11-18  behöver fixa vad som händer om player dör
             monster.attack(player);
-            if (!player.isAlive()){
-//                playLostGameScene();
+            if (!player.isAlive()) {
+                playLostGameScene();
             }
         }
+    }
+
+
+    private void playWonGameScene() {
+        System.out.println("You won the game");
+        player.writeFile();
+    }
+
+
+    // TODO: 2023-11-18 Finish Method
+    private void playLostGameScene() {
+        System.out.println("You lost");
+        System.exit(0);
     }
 
 

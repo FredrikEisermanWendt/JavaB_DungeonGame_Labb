@@ -129,9 +129,7 @@ public class Shop {
     }
 
     private void giveItemsToPlayer() {
-        for (Item i : shoppingCart) {
-            i.use(player);
-        }
+        player.getItemList(shoppingCart);
     }
 
 
