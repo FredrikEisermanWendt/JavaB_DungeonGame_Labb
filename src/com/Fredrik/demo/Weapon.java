@@ -25,6 +25,6 @@ public class Weapon extends Item {
 
     @Override
     public String toString() {
-        return "Weapon: price: " + getPrice();
+        return "Weapon, " + name + ", price: " + getPrice();
     }
 }

@@ -17,6 +17,6 @@ public class HealthPotion extends Item {
 
     @Override
     public String toString() {
-        return "Health potion, Price: " + getPrice();
+        return "Health potion, price: " + getPrice();
     }
 }

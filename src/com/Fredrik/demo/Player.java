@@ -40,13 +40,13 @@ public class Player extends Character {
 
     @Override
     public String toString() {
-        return  name +
-                GREEN + "\nHealth: " + getHealth() +
+        return  WHITE_BOLD + name +
                 BLUE + "\nLevel: " + getLevel() +
+                GREEN + "\nHealth: " + getHealth() + "/" + getFullHealth() +
                 RED + "\nStrength: " + getStrength() +
                 CYAN + "\nAgility: " + getAgility() +
                 PURPLE + "\nIntelligence: " + getIntelligence() +
-                WHITE + "\nExperience: " + getExperience() +
+                WHITE + "\nExperience: " + getExperience() + "/100" +
                 YELLOW + "\nMoney: " + getMoney() + RESET;
     }
 
