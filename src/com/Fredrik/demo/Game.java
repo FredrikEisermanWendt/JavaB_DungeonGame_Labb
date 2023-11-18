@@ -3,21 +3,26 @@ package com.Fredrik.demo;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.Fredrik.demo.ColorSetter.RED;
+import static com.Fredrik.demo.ColorSetter.RESET;
+
 public class Game {
 
     private List<Monster> monsterList = new ArrayList<>();
     private Monster boss = new Monster(20);
     private CustomScanner scan = new CustomScanner();
     private Player player;
-    private Shop shop = new Shop(player);
+    private Shop shop;
+
 
     public Game() {
-        titleMenu();
         System.out.println("Welcome adventurer");
         setPlayer();
+        shop = new Shop(player);
         setMonsterList();
         gameMenu();
     }
+
 
     private void setMonsterList() {
         for (int i = 0; i < 10; i++) {
@@ -25,21 +30,24 @@ public class Game {
         }
     }
 
+
     private void setPlayer() {
-        int statPoints = 13;
+        int statPoints = 15;
         String name = scan.registerString("What is your name");
+        System.out.println(name + " What a distinguished name!");
         System.out.println("""
                 You have 15 points to distribute between, Strength, Intelligence and Agility
                 You must give each attribute at least 1 point
-                Chose wisely""");
-        int strength = getPlayerStatsFromUser("Strength", statPoints);
+                Choose wisely""");
+        int strength = getPlayerStatsFromUser("Strength", statPoints - 2);
         statPoints -= strength;
-        int intelligence = getPlayerStatsFromUser("Intelligence", statPoints);
+        int intelligence = getPlayerStatsFromUser("Intelligence", statPoints - 1);
         statPoints -= intelligence;
         System.out.println("What is left is added to your Agility: " + statPoints);
         player = new Player(name, strength, intelligence, statPoints);
 
     }
+
 
     private int getPlayerStatsFromUser(String stat, int statPoints) {
         do {
@@ -52,22 +60,6 @@ public class Game {
         } while (true);
     }
 
-    private void titleMenu() {
-        boolean isPlaying = true;
-        System.out.println("""
-                1: Start the game
-                2: Quit the game""");
-        do {
-            switch (scan.registerString("")) {
-                case "1" -> {
-                    System.out.println("Lets get started!");
-                    isPlaying = false;
-                }
-                case "2" -> System.exit(0);
-                default -> System.out.println("Error: wrong input");
-            }
-        } while (isPlaying);
-    }
 
     private void gameMenu() {
         boolean isPlaying = true;
@@ -80,22 +72,38 @@ public class Game {
                     4: Buy items
                     5: Go back to Title Menu, all progress will be lost""");
             switch (scan.registerString("")) {
-                case "1" -> fightMonsterMenu(0);
-                case "2" -> fightMonsterMenu(1);
+                case "1" -> fightMonster(getMonster());
+                case "2" -> fightBoss(getBoss());
                 case "3" -> System.out.println(player);
                 case "4" -> shop.buyItems();
-                case "5" -> {
-                    titleMenu();
-                    isPlaying = false;
-                }
+                case "5" -> endGame();
+
                 default -> System.out.println("Wrong input " + player.getName());
             }
         } while (isPlaying);
     }
 
-    private void fightMonsterMenu(int i) {
-        boolean isPlaying = true;
-        Monster monster = getMonster(i);
+
+    private void fightMonster(Monster monster) {
+        if (monsterList == null) {
+            System.out.println("You have beaten all the monsters, now please slay the " + RED + boss.getName() + RESET);
+        } else {
+            fightMonsterMenu(monster);
+        }
+    }
+
+
+    private void fightBoss(Monster boss) {
+        if (!monsterList.isEmpty()) {
+            System.out.println("You must beat all the monsters before you can fight the boss");
+        } else {
+            fightMonsterMenu(boss);
+        }
+    }
+
+
+    private void fightMonsterMenu(Monster monster) {
+        boolean isFighting = true;
         System.out.println("You Stumbled upon a " + monster);
         do {
             System.out.println("""
@@ -113,15 +121,14 @@ public class Game {
                 }
                 default -> System.out.println("Wrong input " + player.getName());
             }
-            isPlaying = monster.isAlive();
+            isFighting = monster.isAlive();
 
-        } while (isPlaying);
+        } while (isFighting);
+        if (monster.equals(getBoss())){
+//            playWonGameScene();
+        }
     }
 
-    // TODO: 2023-11-09 Felhantera att monstererna är slut i listan
-    private Monster getMonster(int i) {
-        return i == 1 ? boss : monsterList.get(0);
-    }
 
     private boolean escapeFight(Monster monster) {
         if (player.didDodge()) {
@@ -135,6 +142,7 @@ public class Game {
 
     }
 
+
     private void attackSequence(Monster monster) {
         player.attack(monster);
         if (!monster.isAlive()) {
@@ -142,9 +150,28 @@ public class Game {
             player.getReward(monster);
             monsterList.remove(monster);
         } else {
-//            behöver fixa vad som händer om player dör
+            // TODO: 2023-11-18  behöver fixa vad som händer om player dör
             monster.attack(player);
+            if (!player.isAlive()){
+//                playLostGameScene();
+            }
         }
+    }
+
+
+    private void endGame() {
+        System.out.println("Thank you for playing!");
+        System.exit(0);
+    }
+
+
+    private Monster getBoss() {
+        return boss;
+    }
+
+
+    private Monster getMonster() {
+        return !monsterList.isEmpty() ? monsterList.get(0) : null;
     }
 
 

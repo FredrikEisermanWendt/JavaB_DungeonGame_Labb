@@ -1,5 +1,7 @@
 package com.Fredrik.demo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import com.Fredrik.demo.ColorSetter;
 
@@ -11,6 +13,7 @@ public class Player extends Character {
     private int intelligence;
     private int agility;
     private Weapon weapon = null;
+    List<Item> itemList = new ArrayList<>();
 
 
     //    användaren får 15 poäng att dela på strength agility och intelligence
@@ -101,6 +104,18 @@ public class Player extends Character {
         }
     }
 
+
+    // TODO: 2023-11-18 Fixa WriteFile()
+    @Override
+    public boolean isAlive() {
+        if (super.isAlive()) {
+            return super.isAlive();
+        }
+//        writeFile();
+        return false;
+    }
+
+
     public int getIntelligence() {
         return intelligence;
     }
@@ -123,6 +138,10 @@ public class Player extends Character {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+    }
+
+    public void getItemList(List<Item> itemList){
+        this.itemList.addAll(itemList);
     }
 
 }
