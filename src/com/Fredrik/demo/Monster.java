@@ -1,12 +1,12 @@
 package com.Fredrik.demo;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Monster extends Character {
 
     List<String> monsterNameList = Arrays.asList("Keese", "ChuChu", "Octorok", "Bokoblin", "Moblin", "Lizalfos", "Horriblin", "Gibdo", "Stone Tallus", "Lynox", "King Gleok");
+
 
     public Monster(int level) {
         super(level);
@@ -21,6 +21,7 @@ public class Monster extends Character {
                 + "\nExperience: " + getExperience() + "\nMoney: " + getMoney();
     }
 
+
     @Override
     public void attack(Character player) {
         if (player.looseHealth(getStrength())) {
@@ -31,19 +32,21 @@ public class Monster extends Character {
         }
     }
 
+
     @Override
     public int calculateDamage() {
         return getStrength();
     }
 
+
     @Override
     public String getName() {
-        if (getLevel() > monsterNameList.size() - 1){
+        if (getLevel() > monsterNameList.size() - 1) {
             return monsterNameList.get(monsterNameList.size() - 1);
-        }else if (getLevel() > monsterNameList.size() && getLevel() != 20){
+        } else if (getLevel() > monsterNameList.size() && getLevel() != 20) {
             return "Error; Monster name not found";
-        }else {
-            return monsterNameList.get(getLevel()-1);
+        } else {
+            return monsterNameList.get(getLevel() - 1);
         }
 
     }

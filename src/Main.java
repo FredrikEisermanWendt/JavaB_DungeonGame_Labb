@@ -1,10 +1,4 @@
-import com.Fredrik.demo.*;
-import com.Fredrik.demo.Character;
-import org.junit.jupiter.api.Test;
-
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
+import com.Fredrik.demo.Game;
 
 public class Main {
 

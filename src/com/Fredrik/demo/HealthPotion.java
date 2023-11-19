@@ -6,14 +6,17 @@ public class HealthPotion extends Item {
         super(15, 10, "healthPotion");
     }
 
+
     public int hpToRevive() {
         return getValue();
     }
+
 
     @Override
     public void use(Player p) {
         p.setHealth(Math.min(p.getHealth() + hpToRevive(), p.getFullHealth()));
     }
+
 
     @Override
     public String toString() {

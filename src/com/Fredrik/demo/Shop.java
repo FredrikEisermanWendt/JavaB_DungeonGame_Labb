@@ -3,8 +3,6 @@ package com.Fredrik.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Fredrik.demo.ColorSetter.*;
-
 import static com.Fredrik.demo.ColorSetter.RESET;
 import static com.Fredrik.demo.ColorSetter.WHITE_BOLD;
 
@@ -12,23 +10,24 @@ public class Shop {
 
     private final Player player;
     private final CustomScanner scan = new CustomScanner();
-    private final int ORIGINAL_ARMOR_STOCK = 3;
-    private final int ORIGINAL_POTION_STOCK = 5;
-    private final int ORIGINAL_WEAPON_STOCK = 1;
     private List<Item> itemList = new ArrayList<>();
     private List<Item> shoppingCart = new ArrayList<>();
     private int playersNoOfVisits = 0;
+
 
     public Shop(Player player) {
         generateItemList();
         this.player = player;
     }
 
-    private void generateItemList() {
-        addArmorToList(ORIGINAL_ARMOR_STOCK);
-        addPotionToList(ORIGINAL_POTION_STOCK);
-        addWeaponToList(ORIGINAL_WEAPON_STOCK);
 
+    private void generateItemList() {
+        int originalArmorStock = 3;
+        int originalPotionStock = 5;
+        int originalWeaponStock = 1;
+        addArmorToList(originalArmorStock);
+        addPotionToList(originalPotionStock);
+        addWeaponToList(originalWeaponStock);
     }
 
 
@@ -66,6 +65,7 @@ public class Shop {
         playersNoOfVisits++;
     }
 
+
     private void addToShoppingCart(String type) {
         Item item = getItemByType(type);
 
@@ -83,6 +83,7 @@ public class Shop {
         itemList.remove(item);
 
     }
+
 
     private boolean isPlayerToPoor(Item item) {
         if (player.getMoney() >= getTotalPrice() + item.getPrice()) {
@@ -113,12 +114,14 @@ public class Shop {
         leave();
     }
 
+
     private void printRecept() {
         System.out.println("***************");
         System.out.println("Thank you for buying:");
         printList(shoppingCart, "");
         System.out.println("***************");
     }
+
 
     private void leave() {
         if (!shoppingCart.isEmpty()) {
@@ -127,6 +130,7 @@ public class Shop {
         }
         System.out.println("Thank you for stopping by, you're always welcome here!");
     }
+
 
     private void giveItemsToPlayer() {
         player.setItemList(shoppingCart);
@@ -139,6 +143,7 @@ public class Shop {
             System.out.println(i);
         }
     }
+
 
     private void printWelcomeMessage() {
         if (playersNoOfVisits == 0) {
@@ -161,10 +166,12 @@ public class Shop {
         return price;
     }
 
+
     private void printPlayerMoney() {
         System.out.println("You seem to have " + (player.getMoney() - getTotalPrice()) + " money left");
 
     }
+
 
     private void addWeaponToList(int x) {
         for (int i = 0; i < x; i++) {
@@ -172,11 +179,13 @@ public class Shop {
         }
     }
 
+
     private void addPotionToList(int x) {
         for (int i = 0; i < x; i++) {
             itemList.add(new HealthPotion());
         }
     }
+
 
     private void addArmorToList(int x) {
         for (int i = 0; i < x; i++) {

@@ -13,17 +13,21 @@ public abstract class Item {
         TYPE = type;
     }
 
+
     public int getValue() {
         return VALUE;
     }
+
 
     public int getPrice() {
         return PRICE;
     }
 
-    public String getTYPE(){
+
+    public String getTYPE() {
         return TYPE;
     }
+
 
     public abstract void use(Player player);
 }

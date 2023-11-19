@@ -4,9 +4,11 @@ public class Weapon extends Item {
 
     private final String name = "Travelers sword";
 
+
     public Weapon() {
         super(10, 30, "weapon");
     }
+
 
     @Override
     public void use(Player player) {
@@ -19,9 +21,11 @@ public class Weapon extends Item {
 
     }
 
+
     public String getName() {
         return name;
     }
+
 
     @Override
     public String toString() {

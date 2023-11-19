@@ -10,12 +10,11 @@ import static com.Fredrik.demo.ColorSetter.RESET;
 public class Game {
 
     private final int BOSS_LEVEL = 12;
+    private final Monster boss = new Monster(BOSS_LEVEL);
+    private final CustomScanner scan = new CustomScanner();
+    private final Shop shop;
     private List<Monster> monsterList = new ArrayList<>();
-    private Monster boss = new Monster(BOSS_LEVEL);
-    private CustomScanner scan = new CustomScanner();
     private Player player;
-    private Shop shop;
-
 
 
     public Game() {
@@ -32,6 +31,11 @@ public class Game {
             monsterList.add(new Monster(i + 1));
         }
         shuffleMonsterList();
+    }
+
+
+    private void shuffleMonsterList() {
+        Collections.shuffle(monsterList);
     }
 
 
@@ -68,7 +72,6 @@ public class Game {
     private void gameMenu() {
         boolean isPlaying = true;
         do {
-            // TODO: 2023-11-02 finish menu
             System.out.println("""
                     What would you like to do?
                     1: Fight a monster
@@ -146,7 +149,7 @@ public class Game {
         } else {
             System.out.println("You failed to escape");
             monster.attack(player);
-            if (!player.isAlive()){
+            if (!player.isAlive()) {
                 playLostGameScene();
             }
             return false;
@@ -171,15 +174,14 @@ public class Game {
 
 
     private void playWonGameScene() {
-        System.out.println("You won the game");
+        printVictoryMessage();
         player.writeFile();
         endGame();
     }
 
 
-    // TODO: 2023-11-18 Finish Method
     private void playLostGameScene() {
-        System.out.println("You lost");
+        printLoosingMessage();
         endGame();
     }
 
@@ -201,8 +203,20 @@ public class Game {
     }
 
 
-    private void shuffleMonsterList() {
-        Collections.shuffle(monsterList);
+    private void printVictoryMessage() {
+        System.out.println("***************");
+        System.out.println("The great adventurer " + player.getName() + " has beaten all the evils of th land");
+        System.out.println("They will forever be remembered för their bravery and might");
+        System.out.println("We will likely never see another hero quite as strong");
+    }
+
+
+    private void printLoosingMessage() {
+        System.out.println("***************");
+        System.out.println("The brave adventurer " + player.getName() + " has lost in the fight against evil");
+        System.out.println("Like many before has this adventurer bitten of more than they could chew");
+        System.out.println("The bravery will be remembered by those who cross paths with thw adventurer");
+        System.out.println("But sadly, their name will be forgotten by history");
     }
 
 

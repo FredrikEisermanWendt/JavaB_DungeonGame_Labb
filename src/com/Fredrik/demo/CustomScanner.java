@@ -1,4 +1,5 @@
 package com.Fredrik.demo;
+
 import java.util.Scanner;
 
 public class CustomScanner {
@@ -16,6 +17,7 @@ public class CustomScanner {
         return result;
     }
 
+
     private int intChecker() {
         if (INPUT.hasNextInt()) {
             int i = INPUT.nextInt();
@@ -26,6 +28,7 @@ public class CustomScanner {
             return -100;
         }
     }
+
 
     public String registerString(String header) {
         String string;
@@ -38,6 +41,7 @@ public class CustomScanner {
         return string;
     }
 
+
     private String inputString(String header) {
         System.out.println(header);
         String string = INPUT.nextLine();
@@ -48,10 +52,12 @@ public class CustomScanner {
         return string;
     }
 
+
     public void inputReturn(String header) {
         System.out.print(header);
         INPUT.nextLine();
     }
+
 
     private String formatFixer(String input) {
 
