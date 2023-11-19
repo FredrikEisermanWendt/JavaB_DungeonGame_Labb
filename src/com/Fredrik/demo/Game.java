@@ -1,6 +1,7 @@
 package com.Fredrik.demo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.Fredrik.demo.ColorSetter.RED;
@@ -30,6 +31,7 @@ public class Game {
         for (int i = 0; i < 10; i++) {
             monsterList.add(new Monster(i + 1));
         }
+        shuffleMonsterList();
     }
 
 
@@ -68,11 +70,12 @@ public class Game {
         do {
             // TODO: 2023-11-02 finish menu
             System.out.println("""
+                    What would you like to do?
                     1: Fight a monster
                     2: Fight the boss
                     3: Get your status
                     4: Buy items
-                    5: Go back to Title Menu, all progress will be lost""");
+                    5: End game, all progress will be lost?""");
             switch (scan.registerString("")) {
                 case "1" -> fightMonster(getMonster());
                 case "2" -> fightBoss(getBoss());
@@ -81,6 +84,7 @@ public class Game {
                     shop.buyItems(); player.useItems();
                 }
                 case "5" -> endGame();
+//                case for testing
                 case "6" -> fightMonsterMenu(getBoss());
 
                 default -> System.out.println("Wrong input " + player.getName());
@@ -142,6 +146,9 @@ public class Game {
         } else {
             System.out.println("You failed to escape");
             monster.attack(player);
+            if (!player.isAlive()){
+                playLostGameScene();
+            }
             return false;
         }
 
@@ -166,13 +173,14 @@ public class Game {
     private void playWonGameScene() {
         System.out.println("You won the game");
         player.writeFile();
+        endGame();
     }
 
 
     // TODO: 2023-11-18 Finish Method
     private void playLostGameScene() {
         System.out.println("You lost");
-        System.exit(0);
+        endGame();
     }
 
 
@@ -188,7 +196,13 @@ public class Game {
 
 
     private Monster getMonster() {
+        shuffleMonsterList();
         return !monsterList.isEmpty() ? monsterList.get(0) : null;
+    }
+
+
+    private void shuffleMonsterList() {
+        Collections.shuffle(monsterList);
     }
 
 

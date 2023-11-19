@@ -22,7 +22,12 @@ public class WriteScore {
             writer.write(message);
 
         } catch (IOException e) {
+            System.out.println("Error: an IOException has occured");
             e.printStackTrace();
+
+        }catch (Exception e){
+            System.out.println("Error: an unexpected Exeption has occured");
+
         }
 
     }

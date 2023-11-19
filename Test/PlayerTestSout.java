@@ -1,3 +1,4 @@
+import com.Fredrik.demo.Monster;
 import com.Fredrik.demo.Player;
 import com.Fredrik.demo.Weapon;
 
@@ -20,6 +21,10 @@ public class PlayerTestSout {
 
         kalle = kalle.concat("strop och grodan boll");
         System.out.println(kalle);
+
+
+        Monster monster = new Monster(10);
+        System.out.println(monster);
 
 
     }

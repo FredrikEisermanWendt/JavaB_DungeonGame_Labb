@@ -129,7 +129,7 @@ public class Shop {
     }
 
     private void giveItemsToPlayer() {
-        player.getItemList(shoppingCart);
+        player.setItemList(shoppingCart);
     }
 
 
@@ -142,7 +142,7 @@ public class Shop {
 
     private void printWelcomeMessage() {
         if (playersNoOfVisits == 0) {
-            System.out.println("Welcome... What you are " + player.getName() + " aren't you? ");
+            System.out.println("Welcome... Whait... You are " + player.getName() + " aren't you? ");
             System.out.println("Thank you for blessing my simple shop with your presence");
         } else if (playersNoOfVisits == 1) {
             System.out.println("Welcome back " + player.getName() + " I hope I may use your name so casually");
