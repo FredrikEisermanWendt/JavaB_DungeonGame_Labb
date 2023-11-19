@@ -13,7 +13,9 @@ public class Player extends Character {
     private int intelligence;
     private int agility;
     private Weapon weapon = null;
-    List<Item> itemList = new ArrayList<>();
+    private List<Item> itemList = new ArrayList<>();
+    private WriteScore ws = new WriteScore();
+    private int monsterCount;
 
 
     //    användaren får 15 poäng att dela på strength agility och intelligence
@@ -99,6 +101,7 @@ public class Player extends Character {
     public void getReward(Monster monster) {
         setExperience(getExperience() + monster.getExperience());
         setMoney(getMoney() + monster.getMoney());
+        setMonsterCount(getMonsterCount() + 1);
         if (getExperience() >= 100) {
             levelUp();
         }
@@ -118,7 +121,15 @@ public class Player extends Character {
 
     // TODO: 2023-11-18 fixa write score clas + method, 
     public void writeFile() {
-//        ws.WriteScoreCard();
+        ws.writeScoreFile(this);
+    }
+
+    public void useItems() {
+        for (Item i : itemList){
+            i.use(this);
+
+        }
+        itemList.clear();
     }
 
 
@@ -150,12 +161,12 @@ public class Player extends Character {
         this.itemList.addAll(itemList);
     }
 
+    public int getMonsterCount() {
+        return monsterCount;
+    }
 
-    public void useItems() {
-        for (Item i : itemList){
-            i.use(this);
-            
-        }
-        itemList.clear();
+
+    public void setMonsterCount(int monsterCount) {
+        this.monsterCount = monsterCount;
     }
 }

@@ -38,7 +38,7 @@ public class Monster extends Character {
 
     @Override
     public String getName() {
-        if (getLevel() == 20){
+        if (getLevel() > monsterNameList.size() - 1){
             return monsterNameList.get(monsterNameList.size() - 1);
         }else if (getLevel() > monsterNameList.size() && getLevel() != 20){
             return "Error; Monster name not found";

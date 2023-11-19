@@ -8,11 +8,13 @@ import static com.Fredrik.demo.ColorSetter.RESET;
 
 public class Game {
 
+    private final int BOSS_LEVEL = 12;
     private List<Monster> monsterList = new ArrayList<>();
-    private Monster boss = new Monster(20);
+    private Monster boss = new Monster(BOSS_LEVEL);
     private CustomScanner scan = new CustomScanner();
     private Player player;
     private Shop shop;
+
 
 
     public Game() {
